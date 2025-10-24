@@ -10,9 +10,18 @@ public class RecursiveMethods {
 	 * @return base ^ exponent
 	 */
 	public static double exponent(int base, int exp) {
-		
+			
+			if (exp == 0){
+				return 1;
+			}
+			if (exp < 0) {
+				return 1.0 / (base) * (exponent(base, exp+1));
+				
+			} else {
+				return base * exponent(base, exp-1);
+			}
+
 			// FIXME Recursively compute base^exp
-			return 0;
 			
 	}
 
@@ -25,10 +34,20 @@ public class RecursiveMethods {
 	 * @return the sum of the elements in values
 	 */
 	public static int arraySum(int[] array) {
-		
+			int sum = 0;
+			int index = 0;
+			sum = addSum(array, index, sum);
 			// FIXME: Recursively compute the sum of the values in an array
-			return 0;
+			return sum;
 			
+	}
+
+	public static int addSum(int[] array, int index, int sum){
+		if (index == array.length){
+				return sum;
+			}
+		sum = sum + array[index] + addSum(array, index + 1, sum);
+		return sum;
 	}
 
 	/**
