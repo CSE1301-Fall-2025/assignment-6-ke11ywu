@@ -57,7 +57,7 @@ public class RecursiveMethods {
 	 * @return the nth dragon curve
 	 */
 	public static String dragon(int n) {
-		
+			
 			// FIXME Recursively compute dragon curves
 			return "";
 			
@@ -75,9 +75,25 @@ public class RecursiveMethods {
 	 * @return the length of the longest path that was found
 	 */
 	public static int maxPathLength(boolean[][] chart, int r, int c) {
-		
-			// FIXME Find and return the length of the longest path in the array
+		if (r < 0 || r >= chart.length || c < 0 || c >= chart[0].length){
 			return 0;
+		}
+		if (!chart[r][c]){
+			return 0;
+		}
+
+		chart[r][c] = false;
+		int moveUp = maxPathLength(chart, r - 1, c);
+		int moveDown = maxPathLength(chart, r + 1, c);
+		int moveLeft = maxPathLength(chart, r, c - 1);
+		int moveRight = maxPathLength(chart, r, c + 1);
+
+		// FIXME Find and return the length of the longest path in the array
+		int maxNeighbor = Math.max(Math.max(moveUp, moveDown), Math.max(moveLeft, moveRight));
+
+		chart[r][c] = true;
+
+		return 1 + maxNeighbor;
 			
 	}
 }
